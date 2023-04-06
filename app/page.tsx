@@ -1,27 +1,16 @@
-import fs from  "fs"
 import Link from "next/link"
-
-const getPostMetaData = () => {
-  const folder = "posts/"
-  const files = fs.readdirSync(folder)
-  const markDownPosts = files.filter((file) => file.endsWith(".md"))
-  const slugs = markDownPosts.map((file) => file.replace(".md", ""))
-  return slugs
-}
+import getPostMetadata from "../components/getPostMetadata"
+import PostPreview from "../components/PostPreview"
 
 const HomePage = () => {
-  const postMetadata = getPostMetaData()
-  const postPreviews = postMetadata.map((slug) => {
-    return (
-      <div>
-        <Link href={`/posts/${slug}`}>
-          <h2>{slug}</h2>
-        </Link>
-      </div>
-    )
+  const postMetadata = getPostMetadata()
+  const postPreviews = postMetadata.map((post) => {
+    return <PostPreview key={post.slug} {...post} />
   })
 
-  return <div>{postPreviews}</div>
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{postPreviews}</div>
+  )
 }
 
 export default HomePage
