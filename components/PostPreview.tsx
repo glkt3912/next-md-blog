@@ -2,7 +2,6 @@ import Link from "next/link"
 import { PostMetadata } from "./PostMetadata"
 
 const PostPreview = (props: PostMetadata) => {
-  console.log(props);
   return (
     <div 
       className="border border-violet-200 p-4 rounded-md shadow-md
